@@ -12,4 +12,8 @@ public interface DireccionService {
 	
 	public Direccion registrarDireccion(Direccion bean);
 	
+	public Direccion actualizcionDireccion(Direccion bean);
+	
+	public void eliminarDireccion(int idDireccion);
+
 }

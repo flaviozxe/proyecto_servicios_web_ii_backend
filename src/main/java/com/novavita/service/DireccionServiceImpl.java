@@ -29,4 +29,14 @@ public class DireccionServiceImpl implements DireccionService{
 		return repoDireccion.save(bean);
 	}
 
+	@Override
+	public Direccion actualizcionDireccion(Direccion bean) {
+		return repoDireccion.save(bean);
+	}
+
+	@Override
+	public void eliminarDireccion(int idDireccion) {
+		repoDireccion.usp_eliminar_direccion(idDireccion);
+	}
+
 }

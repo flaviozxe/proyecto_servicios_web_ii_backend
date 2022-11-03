@@ -57,7 +57,7 @@ public class UsuarioController {
     }
     
     
-    @PostMapping("/actualizar")
+    @PutMapping("/actualizar")
     public Usuario actualizarUsuario(
     		@RequestParam(name = "paramId", required = false, defaultValue = "") Long id,
     		@RequestParam(name = "paramDni", required = false, defaultValue = "") String dni,
