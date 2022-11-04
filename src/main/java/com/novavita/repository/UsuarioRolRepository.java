@@ -19,4 +19,6 @@ public interface UsuarioRolRepository extends JpaRepository<UsuarioRol, Long>{
 			@Param("id_usuarioV")Long idUsuario,
 			@Param("id_rolV")Long idRol
 			);
+	
+	
 }

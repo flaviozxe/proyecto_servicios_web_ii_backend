@@ -55,7 +55,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     @Override
     public Usuario obtenerUsuario(String username) {
-        return usuarioRepository.findByUsername(username);
+        return usuarioRepository.findByUsernameAndEnabled(username, true);
     }
 
     @Override

@@ -24,9 +24,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
 	
 	@Transactional
 	@Modifying
-	@Query(value = "{call usp_eliminar_usuario(:id)}", nativeQuery = true)
+	@Query(value = "{call usp_eliminar_usuario(:idI)}", nativeQuery = true)
 	void usp_eliminar_usuario(
-			@Param("id")Long id
+			@Param("idI")Long id
 			);
 	
 	

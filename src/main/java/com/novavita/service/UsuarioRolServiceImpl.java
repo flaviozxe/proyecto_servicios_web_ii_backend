@@ -14,5 +14,5 @@ public class UsuarioRolServiceImpl implements UsuarioRolService{
 	public void cambiarRolUsuario(Long idUsuario, Long idRol) {
 		usuarioRolRpository.usp_actualizar_rol_usuario(idUsuario, idRol);
 	}
-
+	
 }

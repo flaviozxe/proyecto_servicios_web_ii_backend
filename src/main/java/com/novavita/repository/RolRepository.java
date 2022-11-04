@@ -11,4 +11,5 @@ public interface RolRepository extends JpaRepository<Rol,Long> {
 	public Rol findByRolId(Long rolId);
 	
 	public Rol findByRolNombre(String rolNombre);
+	
 }

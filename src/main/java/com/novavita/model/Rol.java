@@ -1,6 +1,9 @@
 package com.novavita.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +14,8 @@ public class Rol {
     @Id
     private Long rolId;
     private String rolNombre;
-
+    
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "rol")
     private Set<UsuarioRol> usuarioRoles = new HashSet<>();
 

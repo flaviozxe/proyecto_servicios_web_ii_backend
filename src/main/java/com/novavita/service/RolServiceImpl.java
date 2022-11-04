@@ -1,5 +1,7 @@
 package com.novavita.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,11 @@ public class RolServiceImpl implements RolService{
 	@Override
 	public Rol buscarRolNombre(String rolNombre) {
 		return rolRepository.findByRolNombre(rolNombre);
+	}
+
+	@Override
+	public List<Rol> listarRol() {
+		return rolRepository.findAll();
 	}
 
 }

@@ -15,6 +15,7 @@ import com.novavita.service.UsuarioRolService;
 import com.novavita.service.UsuarioService;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -121,4 +122,31 @@ public class UsuarioController {
 		List<Usuario> lista = usuarioService.listaUsuarioPorEnabled(enabled);
 		return ResponseEntity.ok(lista);
 	}
+    
+    @GetMapping("/lista/rol")
+	@ResponseBody
+	public ResponseEntity<List<Rol>> listaRol(){
+		List<Rol> lista = rolService.listarRol();
+		return ResponseEntity.ok(lista);
+	}
+    
+
+    @DeleteMapping("/desactivar/{usuarioId}")
+	@ResponseBody
+	public ResponseEntity<HashMap<String, Object>> eliminaDireccion(@PathVariable("usuarioId") Long usuarioId){
+		HashMap<String, Object> salida = new HashMap<String, Object>();
+		try {
+	        usuarioService.eliminarUsuarioPorId(usuarioId);
+			salida.put("message", "eliminacion exitosa");
+
+		}
+		catch(Exception ex) {
+			salida.put("message", "el objeto que envio es nulo");
+			ex.printStackTrace();
+		}
+		
+		return ResponseEntity.ok(salida);
+
+	}
+    
 }
