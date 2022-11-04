@@ -1,5 +1,6 @@
 package com.novavita.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.novavita.model.Usuario;
@@ -11,7 +12,13 @@ public interface UsuarioService {
 	 public Usuario actualizarUsuario(Usuario usuario, Set<UsuarioRol> usuarioRoles) throws Exception;
 
 	 
-	    public Usuario obtenerUsuario(String username);
+	 public Usuario obtenerUsuario(String username);
 
-	    public void eliminarUsuario(Long usuarioId);
+	 public void eliminarUsuario(Long usuarioId);
+	 
+	 public List<Usuario> listaUsuarioPorEnabled(boolean enabled);
+	 
+	 public void eliminarUsuarioPorId(Long id);
+	    
+	    
 }

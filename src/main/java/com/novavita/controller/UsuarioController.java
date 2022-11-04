@@ -2,15 +2,21 @@ package com.novavita.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.novavita.model.Direccion;
 import com.novavita.model.Rol;
 import com.novavita.model.Usuario;
 import com.novavita.model.UsuarioRol;
 import com.novavita.service.RolService;
+import com.novavita.service.UserDetailsServiceImpl;
+import com.novavita.service.UsuarioRolService;
 import com.novavita.service.UsuarioService;
 
+import java.security.Principal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -23,6 +29,12 @@ public class UsuarioController {
     
     @Autowired
     private RolService rolService;
+    
+    @Autowired
+    private UsuarioRolService usuarioRolService;
+    
+    @Autowired
+	private UserDetailsServiceImpl userDetailsService;
 
     @PostMapping("/registrar")
     public Usuario guardarUsuario(
@@ -79,15 +91,16 @@ public class UsuarioController {
         reg.setEmail(email);
         reg.setUsername(username);
         reg.setPassword(password);
-        
-        Rol rolU = rolService.buscarRolNombre(nomRol);
+         
+        //obtener rol
+        Rol rol = rolService.buscarRolNombre(nomRol);
+       
+        //cambiar rol a usuario
+        usuarioRolService.cambiarRolUsuario(reg.getId(), rol.getRolId());
         
 
-        UsuarioRol usuarioRol = new UsuarioRol();
-        usuarioRol.setUsuario(reg);
-        usuarioRol.setRol(rolU);
 
-        usuarioRoles.add(usuarioRol);
+
         return usuarioService.actualizarUsuario(reg,usuarioRoles);
     }
 
@@ -100,5 +113,12 @@ public class UsuarioController {
     public void eliminarUsuario(@PathVariable("usuarioId") Long usuarioId){
         usuarioService.eliminarUsuario(usuarioId);
     }
-
+    
+    @GetMapping("/lista")
+	@ResponseBody
+	public ResponseEntity<List<Usuario>> listaUsuario(
+			@RequestParam(name = "paramEnable", required = false, defaultValue = "") boolean enabled){
+		List<Usuario> lista = usuarioService.listaUsuarioPorEnabled(enabled);
+		return ResponseEntity.ok(lista);
+	}
 }

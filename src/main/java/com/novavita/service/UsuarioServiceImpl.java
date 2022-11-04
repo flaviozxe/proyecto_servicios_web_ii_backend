@@ -10,6 +10,7 @@ import com.novavita.model.UsuarioRol;
 import com.novavita.repository.RolRepository;
 import com.novavita.repository.UsuarioRepository;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -46,10 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario actualizarUsuario(Usuario usuario, Set<UsuarioRol> usuarioRoles) throws Exception {
     	Usuario usuarioLocal = new Usuario();
         
-        for(UsuarioRol usuarioRol:usuarioRoles){
-                rolRepository.save(usuarioRol.getRol());
-          }
-        usuario.setUsuarioRoles(usuarioRoles);
+ 
         usuarioLocal = usuarioRepository.save(usuario);
         return usuarioLocal;
 	}
@@ -64,6 +62,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void eliminarUsuario(Long usuarioId) {
         usuarioRepository.deleteById(usuarioId);
     }
+
+	@Override
+	public List<Usuario> listaUsuarioPorEnabled(boolean enabled) {
+		return usuarioRepository.findAllByEnabled(enabled);
+	}
+
+	@Override
+	public void eliminarUsuarioPorId(Long id) {
+		 usuarioRepository.usp_eliminar_usuario(id);
+	}
 
 	
 }

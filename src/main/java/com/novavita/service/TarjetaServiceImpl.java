@@ -34,4 +34,21 @@ public class TarjetaServiceImpl implements TarjetaService{
 		 repoTarjeta.usp_eliminar_tarjeta(idTarjeta);
 	}
 
+	@Override
+	public Tarjeta registrarTarjeta(Tarjeta bean) {
+		return repoTarjeta.save(bean);
+	}
+
+	@Override
+	public Tarjeta actualizarTarjeta(Tarjeta bean) {
+		return repoTarjeta.save(bean);
+	}
+
+	@Override
+	public List<Tarjeta> listaTarjetaPorNumeroTDiferenteDelMismoID(String num_tarjeta, int id) {
+		return repoTarjeta.listaTarjetaPorNumeroTDiferenteDelMismoID(num_tarjeta, id);
+	}
+
+
+
 }
