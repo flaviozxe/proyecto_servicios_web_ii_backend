@@ -43,8 +43,11 @@ public class DireccionController {
 	@GetMapping("/lista")
 	@ResponseBody
 	public ResponseEntity<List<Direccion>> listaDireccionIdUsuario(Principal principal,
-			@RequestParam(name = "paramEstado", required = false, defaultValue = "") int estado){
+			@RequestParam(name = "paramEstado", required = false, defaultValue = "") int estado){	
     	Usuario usuario = (Usuario) this.userDetailsService.loadUserByUsername(principal.getName());
+    	
+		System.out.println("");
+		System.out.println("Se ah listado las direcciones");
 		List<Direccion> lista = direccionService.listaDireccionPorUsuario(usuario.getId(), estado);
 		return ResponseEntity.ok(lista);
 	}
@@ -53,6 +56,9 @@ public class DireccionController {
 	@ResponseBody
 	public ResponseEntity<Direccion> obtenerDireccion(
 			@RequestParam(name = "paramDireccion", required = false, defaultValue = "") int idDireccion){
+		
+		System.out.println("");
+		System.out.println("Se ah obtener las direcciones");
 		Direccion direccion = direccionService.obtenerDireccionPorId(idDireccion);
 		return ResponseEntity.ok(direccion);
 	}
@@ -60,6 +66,8 @@ public class DireccionController {
 	@GetMapping("/lista/distrito")
 	@ResponseBody
 	public ResponseEntity<List<Distrito>> listaDistrito(){
+		System.out.println("");
+		System.out.println("Se ah listado los distritos");
 		List<Distrito> lista = distritoService.listaDistritos();
 		return ResponseEntity.ok(lista);
 	}
@@ -77,6 +85,8 @@ public class DireccionController {
 				
 				Direccion objetoSalida = direccionService.registrarDireccion(bean);	
 				if(objetoSalida != null) {
+					System.out.println("");
+					System.out.println("Se ah registrado la direccion");
 					salida.put("message", "registro exitoso");
 				}
 				else {
@@ -103,6 +113,8 @@ public class DireccionController {
 			if(bean != null) {			
 				Direccion objetoSalida = direccionService.actualizcionDireccion(bean);	
 				if(objetoSalida != null) {
+					System.out.println("");
+					System.out.println("Se ah actualizado la direccion");
 					salida.put("message", "actualizacion exitosa");
 				}
 				else {
@@ -128,6 +140,8 @@ public class DireccionController {
 		HashMap<String, Object> salida = new HashMap<String, Object>();
 		try {
 			direccionService.eliminarDireccion(idDireccion);
+			System.out.println("");
+			System.out.println("Se ah elimado la direccion");
 			salida.put("message", "eliminacion exitosa");
 
 		}

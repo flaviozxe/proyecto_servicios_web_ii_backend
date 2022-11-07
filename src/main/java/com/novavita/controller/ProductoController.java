@@ -28,6 +28,8 @@ public class ProductoController {
 	@ResponseBody
 	public ResponseEntity<List<Producto>> listaProductoMejorCalidad(){
 		List<Producto> lista = serviceProducto.listarProductoMejorCalidad();
+		System.out.println("");
+		System.out.println("Se ah listado los productos");
 		return ResponseEntity.ok(lista);
 	}
 	
@@ -36,6 +38,8 @@ public class ProductoController {
 	public ResponseEntity<Producto> buscarProducto(@PathVariable("paramId") int idProducto){
 		Optional<Producto> optProducto = serviceProducto.buscarProductoPorId(idProducto);
 		if(optProducto.isPresent()) {
+			System.out.println("");
+			System.out.println("Se ah obtenido el producto");
 			return ResponseEntity.ok(optProducto.get());
 		}
 		else {
@@ -47,6 +51,8 @@ public class ProductoController {
 	@ResponseBody
 	public ResponseEntity<List<Producto>> listarProductoConStock(){
 		List<Producto> lista = serviceProducto.listarProductoConStock();
+		System.out.println("");
+		System.out.println("Se ah listado los productos con stock");
 		return ResponseEntity.ok(lista);
 	}
 	
@@ -56,6 +62,8 @@ public class ProductoController {
 			@RequestParam(name = "paramIdCategoria", required = false, defaultValue = "") int id_categoria,
 			@RequestParam(name = "paramMarcaProducto", required = false, defaultValue = "") String marca_producto){
 		List<Producto> lista = serviceProducto.listarProductoPorCategoriaYMarca(id_categoria, marca_producto);
+		System.out.println("");
+		System.out.println("Se ah consultado los productos");
 		return ResponseEntity.ok(lista);
 	}
 	

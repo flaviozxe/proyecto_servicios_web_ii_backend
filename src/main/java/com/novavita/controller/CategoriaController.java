@@ -24,6 +24,8 @@ public class CategoriaController {
 	@GetMapping("/lista")
 	public ResponseEntity<List<Categoria>> listaCategoria() {
 		
+		System.out.println("");
+		System.out.println("Se ah listado las categorias");
 		return ResponseEntity.ok(serviceCategoria.listaCategoria());
 		
 	}

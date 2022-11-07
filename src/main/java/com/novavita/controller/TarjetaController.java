@@ -36,10 +36,14 @@ public class TarjetaController {
 	
 	@GetMapping("/lista")
 	@ResponseBody
-	public ResponseEntity<List<Tarjeta>> listaDireccionIdUsuario(Principal principal,
+	public ResponseEntity<List<Tarjeta>> listaTarjetasIdUsuario(Principal principal,
 			@RequestParam(name = "paramEstado", required = false, defaultValue = "") int estado){
     	Usuario usuario = (Usuario) this.userDetailsService.loadUserByUsername(principal.getName());
 		List<Tarjeta> lista = tarjetaService.listaTarjetaPorUsuarioEstado(usuario.getId(), estado);
+		
+		System.out.println("");
+		System.out.println("Se ah listado las tarjetas");
+		
 		return ResponseEntity.ok(lista);
 	}
 	
@@ -48,6 +52,10 @@ public class TarjetaController {
 	public ResponseEntity<Tarjeta> obtenerTarjeta(
 			@RequestParam(name = "paramTarjeta", required = false, defaultValue = "") int idTarjeta){
 		Tarjeta tarjeta = tarjetaService.buscarTarjetaId(idTarjeta);
+		
+		System.out.println("");
+		System.out.println("Se ah obtenido la tarjeta");
+		
 		return ResponseEntity.ok(tarjeta);
 	}
 	
@@ -75,6 +83,8 @@ public class TarjetaController {
 				
 				Tarjeta objetoSalida = tarjetaService.registrarTarjeta(bean);	
 				if(objetoSalida != null) {
+					System.out.println("");
+					System.out.println("Se registrado la tarjeta");
 					salida.put("message", "registro exitoso");
 				}
 				else {
@@ -106,6 +116,8 @@ public class TarjetaController {
 				if(listaBusca.size() == 0) {
 					Tarjeta objetoSalida = tarjetaService.actualizarTarjeta(bean);	
 					if(objetoSalida != null) {
+						System.out.println("");
+						System.out.println("Se actualizado la tarjeta");
 						salida.put("message", "actualizacion exitosa");
 					}
 					else {
@@ -137,6 +149,8 @@ public class TarjetaController {
 		
 		try {
 			tarjetaService.eliminarTarjeta(idTarjeta);
+			System.out.println("");
+			System.out.println("Se eliminado la tarjeta");
 			salida.put("message", "eliminacion exitosa");
 
 		}
