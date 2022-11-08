@@ -3,14 +3,19 @@ package com.novavita.controller;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.novavita.model.OrdenVenta;
 import com.novavita.model.Usuario;
 import com.novavita.service.OrdenVentaService;
 import com.novavita.service.UserDetailsServiceImpl;
@@ -48,5 +53,13 @@ public class OrdenVentaController {
 		serviceOrdenVenta.insertarDetalleOrdenVenta(idProducto, cantProducto, precioProducto, subTotal);
 	}
 	
+	@GetMapping("/lista")
+	@ResponseBody
+	public ResponseEntity<List<OrdenVenta>> listaOrdenVentaIdUsuario(Principal principal){	
+    	Usuario usuario = (Usuario) this.userDetailsService.loadUserByUsername(principal.getName());
+    	
+		List<OrdenVenta> lista = serviceOrdenVenta.listarPorIdUsuario(usuario.getId());
+		return ResponseEntity.ok(lista);
+	}
 	
 }
